@@ -1,0 +1,33 @@
+.home-page {
+  overflow-x: hidden;
+  background-color: #242424;
+
+}
+
+.hero {
+  background: #242424;
+  ;
+  padding: 4rem 0;
+}
+
+.bg-gradient-primary {
+  background: #242424;
+ 
+}
+
+.bg-gradient-secondary {
+    background: #242424;
+}
+
+.features .card {
+  transition: transform 0.3s;
+}
+
+/* .features .card:hover {
+  transform: translateY(-5px);
+} */
+
+.cta {
+    background: #242424;
+   
+}
