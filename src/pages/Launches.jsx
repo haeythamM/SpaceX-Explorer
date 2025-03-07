@@ -1,21 +1,21 @@
 import React from "react";
+import LaunchesList from "../components/LaunchesList";
 import "./Launches.css";
-import Launches from './components/Launches';
 
 const Launches = () => {
-  return (
+return (
     <div className="launches">
-      <div className="container mt-4">
-        <div className="p-5 bg-secondary text-white rounded">
-          <h1>Launches Page</h1>
-          <p className="lead">
-            Here you can find details about the latest launches.
-          </p>
+        <div className="container mt-4">
+            <div className="p-5 bg-secondary text-white rounded">
+                <h1>Launches Page</h1>
+                <p className="lead">
+                    Here you can find details about the latest launches.
+                </p>
+            </div>
+            <LaunchesList />
         </div>
-        <Launches />
-      </div>
     </div>
-  );
+);
 };
 
 export default Launches;
