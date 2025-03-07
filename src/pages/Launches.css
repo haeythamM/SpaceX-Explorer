@@ -1,4 +1,14 @@
 html, body {
-    background-color:  #242424!important;  
-    color: #ffffff !important;  
+    background-color:  #242424!important;
+    color: #ffffff !important;
+}
+
+.launch-item {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.launch-date {
+  font-size: 1em;
+  color: #555;
 }
