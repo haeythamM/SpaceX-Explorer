@@ -6,7 +6,6 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home-page">
-      {/* Hero Section */}
       <section className="hero bg-dark text-light py-5">
         <div className="container text-center">
           <h1 className="display-4 mb-4 fw-bold">
