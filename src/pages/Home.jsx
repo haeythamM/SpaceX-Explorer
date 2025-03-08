@@ -18,7 +18,7 @@ const Home = () => {
             <div className="col-md-6">
               <div className="p-4 border rounded bg-gradient-primary">
                 <h3>Launches</h3>
-                <p>Explore recent and upcoming SpaceX missions</p>
+                <p >Explore SpaceX missions</p>
                 <Link to="/launches" className="btn btn-light btn-lg mt-3">
                   View Launches <FaRocket className="ms-2" />
                 </Link>

@@ -20,7 +20,19 @@ const Launches = () => {
   useEffect(() => {
     fetch("https://api.spacexdata.com/v4/launches")
       .then((response) => response.json())
-      .then((data) => setLaunches(data.reverse()));
+      .then((data) => {
+        const now = new Date();
+        const processedLaunches = data
+          .map(launch => ({
+            ...launch,
+            actualStatus: launch.upcoming 
+              ? new Date(launch.date_utc) > now ? 'upcoming' : 'unknown'
+              : launch.success ? 'success' : 'failed'
+          }))
+          .sort((a, b) => new Date(b.date_utc) - new Date(a.date_utc));
+        
+        setLaunches(processedLaunches);
+      });
   }, []);
 
   return (
@@ -36,60 +48,73 @@ const Launches = () => {
         </header>
 
         <div className="row g-4">
-          {launches.map((launch) => (
-            <div key={launch.id} className="col-12 col-md-6 col-lg-4">
-              <div className="launch-card h-100 p-4 rounded-3">
-                <div className="d-flex flex-column h-100">
-                  <div className="text-center mb-3">
-                    <img
-                      src={launch.links.patch?.small || FALLBACK_IMAGE}
-                      alt={`${launch.name} mission patch`}
-                      className="mission-patch img-fluid"
-                      onError={(e) => {
-                        e.target.src = FALLBACK_IMAGE;
-                      }}
-                    />
-                  </div>
+          {launches.map((launch) => {
+            const launchDate = new Date(launch.date_utc);
+            const isPast = launchDate < new Date();
+            
+            return (
+              <div key={launch.id} className="col-12 col-md-6 col-lg-4">
+                <div className="launch-card h-100 p-4 rounded-3">
+                  <div className="d-flex flex-column h-100">
+                    <div className="text-center mb-3">
+                      <img
+                        src={launch.links.patch?.small || FALLBACK_IMAGE}
+                        alt={`${launch.name} mission patch`}
+                        className="mission-patch img-fluid"
+                        onError={(e) => {
+                          e.target.src = FALLBACK_IMAGE;
+                        }}
+                      />
+                    </div>
 
-                  <h2 className="h5 fw-bold mb-3 text-light">{launch.name}</h2>
-                  <div className="mb-3">
-                    <span
-                      className={`badge ${
-                        launch.success ? "bg-success" : "bg-danger"
-                      }`}
-                    >
-                      {launch.success ? "Successful" : "Failed"}
-                    </span>
-                    {launch.upcoming && (
-                      <span className="badge bg-warning ms-2">Upcoming</span>
-                    )}
-                  </div>
+                    <h2 className="h5 fw-bold mb-3 text-light">{launch.name}</h2>
+                    <div className="mb-3">
+                      <span
+                        className={`badge ${
+                          launch.actualStatus === 'upcoming'
+                            ? "bg-warning"
+                            : launch.actualStatus === 'success'
+                            ? "bg-success"
+                            : launch.actualStatus === 'failed'
+                            ? "bg-danger"
+                            : "bg-secondary"
+                        }`}
+                        style={launch.actualStatus === 'upcoming' ? { color: 'black' } : undefined}
+                      >
+                        {launch.actualStatus === 'upcoming' && "Upcoming"}
+                        {launch.actualStatus === 'success' && "Successful"}
+                        {launch.actualStatus === 'failed' && "Failed"}
+                        {launch.actualStatus === 'unknown' && "Unknown Status"}
+                      </span>
+                    </div>
 
-                  <div className="mt-auto">
-                    <p className="text-muted small mb-2">
-                      {new Date(launch.date_utc).toLocaleDateString("en-US", {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric"
-                      })}
-                    </p>
-                    <button
-                      className="btn btn-outline-light w-100"
-                      onClick={() =>
-                        window.open(launch.links.webcast, "_blank")
-                      }
-                      disabled={!launch.links.webcast}
-                    >
-                      {launch.links.webcast
-                        ? "Watch Mission →"
-                        : "No Video Available"}
-                    </button>
+                    <div className="mt-auto">
+                      <p className="text-muted small mb-2">
+                        {launchDate.toLocaleDateString("en-US", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric"
+                        })}
+                        {isPast && ` at ${launchDate.toLocaleTimeString()}`}
+                      </p>
+                      <button
+                        className="btn btn-outline-light w-100"
+                        onClick={() =>
+                          window.open(launch.links.webcast, "_blank")
+                        }
+                        disabled={!launch.links.webcast}
+                      >
+                        {launch.links.webcast
+                          ? "Watch Mission →"
+                          : "No Video Available"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
