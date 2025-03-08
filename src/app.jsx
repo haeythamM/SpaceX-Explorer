@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import "./app";
 import "./index.css";
 import About from "./pages/About";
@@ -66,7 +66,7 @@ const App = () => {
             <Route path="/launches" element={<Launches />} />
             <Route path="/about" element={<About />} />
           </Routes>
-          <Outlet />
+          {/* <Outlet /> */}
         </div>
       </main>
 
