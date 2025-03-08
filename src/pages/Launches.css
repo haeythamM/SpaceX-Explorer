@@ -1,14 +1,73 @@
-html, body {
-    background-color:  #242424!important;
-    color: #ffffff !important;
+.launches {
+  background-color: #121212;
+  min-height: 100vh;
 }
 
-.launch-item {
-  font-size: 1.2em;
-  margin-bottom: 15px;
+.launch-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.launch-date {
-  font-size: 1em;
-  color: #555;
+.launch-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-color: #ff6b42;
+}
+
+.mission-patch {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+
+.launch-card:hover .mission-patch {
+  filter: grayscale(0%) drop-shadow(0 0 8px rgba(255, 107, 66, 0.3));
+}
+
+.btn-outline-light {
+  border-color: #4a4a4a;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  background: #ff6b42;
+  border-color: #ff6b42;
+  transform: scale(1.02);
+}
+
+.btn-outline-light:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.display-4 {
+  background: linear-gradient(to right, #ff6b42, #ff9b6e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-muted {
+  color: #8a8a8a !important;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.5em 0.8em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mission-patch {
+    height: 100px;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
 }

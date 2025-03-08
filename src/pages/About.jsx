@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./About.css";
 
 const About = () => {
   const [companyInfo, setCompanyInfo] = useState(null);
@@ -9,9 +10,7 @@ const About = () => {
     setLoading(true);
     fetch("https://api.spacexdata.com/v4/company")
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch company info");
-        }
+        if (!response.ok) throw new Error("Failed to fetch company info");
         return response.json();
       })
       .then((data) => {
@@ -26,8 +25,8 @@ const About = () => {
 
   if (loading) {
     return (
-      <div className="container mt-4 p-5 text-center">
-        <div className="spinner-border" role="status">
+      <div className="about-page min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="spinner-border text-accent" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -36,8 +35,9 @@ const About = () => {
 
   if (error) {
     return (
-      <div className="container mt-4 p-5">
-        <div className="alert alert-danger" role="alert">
+      <div className="about-page min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="alert alert-danger text-center" role="alert">
+          <i className="bi bi-x-octagon-fill me-2"></i>
           Error: {error}
         </div>
       </div>
@@ -45,52 +45,130 @@ const About = () => {
   }
 
   return (
-    <div className="container mt-4 p-5">
-      <h1>About this app</h1>
-      <div className="alert alert-info" role="alert">
-        <h4 className="alert-heading">Disclaimer</h4>
-        <p>
-          This project is not affiliated with SpaceX. It is a personal training
-          project by Haeytham Almalak to explore REST APIs.
-        </p>
-      </div>
-      {companyInfo && (
-        <div className="card">
+    <div className="about-page">
+      <div className="container py-5">
+        <header className="text-center mb-5">
+          <h1 className="display-4 fw-bold text-gradient mb-3">About SpaceX</h1>
+          <p className="lead text-light opacity-75">
+            Pioneering the Future of Space Exploration
+          </p>
+        </header>
+
+        <div className="info-card mb-5">
           <div className="card-body">
-            <h5 className="card-title">About SpaceX</h5>
-            <dl className="row">
-              <dt className="col-sm-3">Name</dt>
-              <dd className="col-sm-9">{companyInfo.name}</dd>
-              <dt className="col-sm-3">Founder</dt>
-              <dd className="col-sm-9">{companyInfo.founder}</dd>
-              <dt className="col-sm-3">Founded</dt>
-              <dd className="col-sm-9">{companyInfo.founded}</dd>
-              <dt className="col-sm-3">Employees</dt>
-              <dd className="col-sm-9">{companyInfo.employees}</dd>
-              <dt className="col-sm-3">Vehicles</dt>
-              <dd className="col-sm-9">{companyInfo.vehicles}</dd>
-              <dt className="col-sm-3">Launch Sites</dt>
-              <dd className="col-sm-9">{companyInfo.launch_sites}</dd>
-              <dt className="col-sm-3">Test Sites</dt>
-              <dd className="col-sm-9">{companyInfo.test_sites}</dd>
-              <dt className="col-sm-3">CEO</dt>
-              <dd className="col-sm-9">{companyInfo.ceo}</dd>
-              <dt className="col-sm-3">CTO</dt>
-              <dd className="col-sm-9">{companyInfo.cto}</dd>
-              <dt className="col-sm-3">COO</dt>
-              <dd className="col-sm-9">{companyInfo.coo}</dd>
-              <dt className="col-sm-3">CTO of Propulsion</dt>
-              <dd className="col-sm-9">{companyInfo.cto_propulsion}</dd>
-              <dt className="col-sm-3">Valuation</dt>
-              <dd className="col-sm-9">
-                {new Intl.NumberFormat("en-US").format(companyInfo.valuation)}
-              </dd>
-            </dl>
-            <h6>Summary</h6>
-            <p>{companyInfo.summary}</p>
+            <h4 className="card-title text-accent mb-3">Project Disclaimer</h4>
+            <p className="card-text">
+              This project is not affiliated with or endorsed by SpaceX. It is a
+              personal training project developed by Haeytham Almalak to explore
+              REST APIs and modern web development technologies.
+            </p>
           </div>
         </div>
-      )}
+
+        {companyInfo && (
+          <div className="company-card">
+            <div className="card-body">
+              <div className="row g-4">
+                <div className="col-12 col-lg-4 border-lg-end border-accent">
+                  <div className="pe-lg-4">
+                    <h3 className="text-accent mb-4">Key Metrics</h3>
+                    <div className="metric-item">
+                      <span className="metric-label">Founded</span>
+                      <span className="metric-value">
+                        {companyInfo.founded}
+                      </span>
+                    </div>
+                    <div className="metric-item">
+                      <span className="metric-label">Employees</span>
+                      <span className="metric-value">
+                        {new Intl.NumberFormat().format(companyInfo.employees)}
+                      </span>
+                    </div>
+                    <div className="metric-item">
+                      <span className="metric-label">Valuation</span>
+                      <span className="metric-value">
+                        ${new Intl.NumberFormat().format(companyInfo.valuation)}
+                      </span>
+                    </div>
+                    <div className="metric-item">
+                      <span className="metric-label">Launch Sites</span>
+                      <span className="metric-value">
+                        {companyInfo.launch_sites}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Leadership */}
+                <div className="col-12 col-lg-4 border-lg-end border-accent">
+                  <div className="px-lg-4">
+                    <h3 className="text-accent mb-4">Leadership</h3>
+                    <div className="leader-item">
+                      <span className="leader-position">CEO</span>
+                      <span className="leader-name">{companyInfo.ceo}</span>
+                    </div>
+                    <div className="leader-item">
+                      <span className="leader-position">CTO</span>
+                      <span className="leader-name">{companyInfo.cto}</span>
+                    </div>
+                    <div className="leader-item">
+                      <span className="leader-position">COO</span>
+                      <span className="leader-name">{companyInfo.coo}</span>
+                    </div>
+                    <div className="leader-item">
+                      <span className="leader-position">CTO Propulsion</span>
+                      <span className="leader-name">
+                        {companyInfo.cto_propulsion}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Company Details */}
+                <div className="col-12 col-lg-4">
+                  <div className="ps-lg-4">
+                    <h3 className="text-accent mb-4">Company Details</h3>
+                    <div className="detail-item">
+                      <span className="detail-label">Founder</span>
+                      <span className="detail-value">
+                        {companyInfo.founder}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Headquarters</span>
+                      <span className="detail-value">
+                        {companyInfo.headquarters.address},{" "}
+                        {companyInfo.headquarters.city},<br />
+                        {companyInfo.headquarters.state}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Vehicles</span>
+                      <span className="detail-value">
+                        {companyInfo.vehicles}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Test Sites</span>
+                      <span className="detail-value">
+                        {companyInfo.test_sites}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Company Summary */}
+              <div className="row mt-5">
+                <div className="col-12">
+                  <h3 className="text-accent mb-3">Mission Statement</h3>
+                  <p className="company-summary">{companyInfo.summary}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

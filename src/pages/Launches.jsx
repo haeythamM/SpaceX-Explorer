@@ -1,32 +1,96 @@
-import React, { useEffect, useState } from 'react';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import React, { useEffect, useState } from "react";
 import "./Launches.css";
+
+const FALLBACK_IMAGE = `data:image/svg+xml;base64,${btoa(`
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1a1a1a"/>
+  <path d="M100 60L40 120H80L100 100L120 120H160L100 60Z" fill="#2a2a2a"/>
+  <path d="M140 140L160 160H180V180H160L140 160V140Z" fill="#ff6b42"/>
+  <circle cx="100" cy="80" r="8" fill="#ff6b42"/>
+  <text x="50%" y="160" dominant-baseline="middle" text-anchor="middle" fill="#ff6b42" font-family="Arial" font-size="14">
+    IMAGE NOT AVAILABLE
+  </text>
+</svg>
+`)}`;
 
 const Launches = () => {
   const [launches, setLaunches] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.spacexdata.com/v4/launches')
-      .then(response => response.json())
-      .then(data => setLaunches(data));
+    fetch("https://api.spacexdata.com/v4/launches")
+      .then((response) => response.json())
+      .then((data) => setLaunches(data.reverse()));
   }, []);
 
   return (
     <div className="launches">
-      <div className="container mt-4">
-        <div className="p-5 bg-secondary text-white rounded">
-          <h1>Launches Page</h1>
-          <p className="lead">
-            Here you can find details about the latest launches.
+      <div className="container py-5">
+        <header className="text-center mb-5">
+          <h1 className="display-4 fw-bold text-uppercase mb-3">
+            SpaceX Launch Manifest
+          </h1>
+          <p className="lead text-light">
+            Comprehensive overview of all SpaceX orbital missions
           </p>
-        </div>
-        <ul>
-          {launches.map(launch => (
-            <li key={launch.id}>
-              <h2>{launch.name}</h2>
-              <p>{launch.date_utc}</p>
-            </li>
+        </header>
+
+        <div className="row g-4">
+          {launches.map((launch) => (
+            <div key={launch.id} className="col-12 col-md-6 col-lg-4">
+              <div className="launch-card h-100 p-4 rounded-3">
+                <div className="d-flex flex-column h-100">
+                  <div className="text-center mb-3">
+                    <img
+                      src={launch.links.patch?.small || FALLBACK_IMAGE}
+                      alt={`${launch.name} mission patch`}
+                      className="mission-patch img-fluid"
+                      onError={(e) => {
+                        e.target.src = FALLBACK_IMAGE;
+                      }}
+                    />
+                  </div>
+
+                  <h2 className="h5 fw-bold mb-3 text-light">{launch.name}</h2>
+                  <div className="mb-3">
+                    <span
+                      className={`badge ${
+                        launch.success ? "bg-success" : "bg-danger"
+                      }`}
+                    >
+                      {launch.success ? "Successful" : "Failed"}
+                    </span>
+                    {launch.upcoming && (
+                      <span className="badge bg-warning ms-2">Upcoming</span>
+                    )}
+                  </div>
+
+                  <div className="mt-auto">
+                    <p className="text-muted small mb-2">
+                      {new Date(launch.date_utc).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
+                      })}
+                    </p>
+                    <button
+                      className="btn btn-outline-light w-100"
+                      onClick={() =>
+                        window.open(launch.links.webcast, "_blank")
+                      }
+                      disabled={!launch.links.webcast}
+                    >
+                      {launch.links.webcast
+                        ? "Watch Mission →"
+                        : "No Video Available"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

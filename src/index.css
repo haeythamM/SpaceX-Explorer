@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424 !important;
+  background-color: #1a1a1a!important;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -11,6 +11,29 @@
 }
 
 body {
-    background-color: #000 !important; /* Set to dark color */
-    color: #fff !important; /* Ensure text is readable on dark background */
+    background: #1a1a1a !important;
+    color: #fff !important;
+}
+
+.root-container {
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #333; 
+}
+
+.main-content {
+  padding: 20px;
+}
+
+
+.footer {
+  background-color: #222;
+  color: #ccc;
+}
+
+.hover-accent:hover {
+  color: #ff0000; 
 }

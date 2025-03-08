@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import App from './App';
+import App from './app';
 import About from './pages/About';
 import Home from './pages/Home';
 import Launches from './pages/Launches';

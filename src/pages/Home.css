@@ -1,22 +1,23 @@
 .home-page {
   overflow-x: hidden;
-  background-color: #242424;
-
+  background-color: #1a1a1a;
+  color: rgb(230, 230, 230);
+  
 }
 
 .hero {
-  background: #242424;
+  background-color: #1a1a1a;
   ;
   padding: 4rem 0;
 }
 
 .bg-gradient-primary {
-  background: #242424;
+  background-color: #1a1a1a;
  
 }
 
 .bg-gradient-secondary {
-    background: #242424;
+  background-color: #1a1a1a;
 }
 
 .features .card {
@@ -28,6 +29,6 @@
 } */
 
 .cta {
-    background: #242424;
+  background-color: #1a1a1a;
    
 }

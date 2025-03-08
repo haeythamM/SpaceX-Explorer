@@ -17,7 +17,7 @@ const Home = () => {
           <div className="row g-4 py-3">
             <div className="col-md-6">
               <div className="p-4 border rounded bg-gradient-primary">
-                <h3>Latest Launches</h3>
+                <h3>Launches</h3>
                 <p>Explore recent and upcoming SpaceX missions</p>
                 <Link to="/launches" className="btn btn-light btn-lg mt-3">
                   View Launches <FaRocket className="ms-2" />
@@ -43,7 +43,7 @@ const Home = () => {
           <div className="row g-4">
             <div className="col-md-4">
               <div className="card h-100 shadow">
-                <div className="card-body text-center">
+                <div className="card-body text-center text-bg-dark">
                   <FaRocket className="text-primary display-4 mb-3" />
                   <h3 className="card-title">Real-time Data</h3>
                   <p className="card-text">
@@ -54,7 +54,7 @@ const Home = () => {
             </div>
             <div className="col-md-4">
               <div className="card h-100 shadow">
-                <div className="card-body text-center">
+                <div className="card-body text-center text-bg-dark">
                   <FaInfoCircle className="text-success display-4 mb-3" />
                   <h3 className="card-title">Detailed Information</h3>
                   <p className="card-text">
@@ -65,7 +65,7 @@ const Home = () => {
             </div>
             <div className="col-md-4">
               <div className="card h-100 shadow">
-                <div className="card-body text-center">
+                <div className="card-body text-center text-bg-dark">
                   <FaEnvelope className="text-danger display-4 mb-3" />
                   <h3 className="card-title">Stay Updated</h3>
                   <p className="card-text">
@@ -78,7 +78,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="cta  text-light py-5">
+      <section className="cta  text-light py-5 ">
         <div className="container text-center">
           <h2 className="mb-4">Ready to Explore?</h2>
           <p className="mb-4">
