@@ -61,7 +61,7 @@
   padding: 0.5em 0.8em;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .mission-patch {
     height: 100px;

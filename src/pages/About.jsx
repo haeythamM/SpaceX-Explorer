@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchCompanyInfo } from "../components/About";
 import "./About.css";
 
 const About = () => {
@@ -7,20 +8,18 @@ const About = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    fetch("https://api.spacexdata.com/v4/company")
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch company info");
-        return response.json();
-      })
-      .then((data) => {
+    const getCompanyInfo = async () => {
+      try {
+        const data = await fetchCompanyInfo();
         setCompanyInfo(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    getCompanyInfo();
   }, []);
 
   if (loading) {
@@ -38,7 +37,7 @@ const About = () => {
       <div className="about-page min-vh-100 d-flex align-items-center justify-content-center">
         <div className="alert alert-danger text-center" role="alert">
           <i className="bi bi-x-octagon-fill me-2"></i>
-          Error: {error}
+          {error}
         </div>
       </div>
     );
@@ -99,7 +98,6 @@ const About = () => {
                   </div>
                 </div>
 
-                {/* Leadership */}
                 <div className="col-12 col-lg-4 border-lg-end border-accent">
                   <div className="px-lg-4">
                     <h3 className="text-accent mb-4">Leadership</h3>
@@ -124,7 +122,6 @@ const About = () => {
                   </div>
                 </div>
 
-                {/* Company Details */}
                 <div className="col-12 col-lg-4">
                   <div className="ps-lg-4">
                     <h3 className="text-accent mb-4">Company Details</h3>
@@ -158,7 +155,6 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Company Summary */}
               <div className="row mt-5">
                 <div className="col-12">
                   <h3 className="text-accent mb-3">Mission Statement</h3>
