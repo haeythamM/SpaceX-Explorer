@@ -1,7 +1,6 @@
 import axios from "axios";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import React, { useEffect, useState } from "react";
-import LaunchesList from "../components/LaunchesList";
 import "./Launches.css";
 
 const FALLBACK_IMAGE = `data:image/svg+xml;base64,${btoa(`
@@ -144,7 +143,7 @@ const Launches = () => {
             })}
           </div>
         )}
-        <LaunchesList />
+       
       </div>
     </div>
   );

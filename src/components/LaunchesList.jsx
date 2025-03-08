@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const LaunchesList = () => {
+const LaunchesList = ({ show = true, title = "Past Launches" }) => {
   const [launches, setLaunches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!show) return;
+
     console.log("LaunchesList component mounted");
 
     const fetchLaunches = async () => {
@@ -25,11 +27,13 @@ const LaunchesList = () => {
     };
 
     fetchLaunches();
-  }, []);
+  }, [show]);
+
+  if (!show) return null;
 
   return (
     <div>
-      <h2>Past Launches</h2>
+      <h2>{title}</h2>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
