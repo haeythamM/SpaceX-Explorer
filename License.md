@@ -1,4 +1,4 @@
-# 📑 Portfolio-Only License (No Redistribution)
+# Portfolio-Only License (No Redistribution)
 
 **Copyright (c) 2025 Haeytham Almalak. All rights reserved.**
 
@@ -16,7 +16,7 @@ It is intended only to showcase technical and design skills.
 
 ---
 
-## 📦 Third-Party Components
+## Third-Party Components
 
 Any third-party libraries, assets, or trademarks remain the property of their respective owners and are covered by their own licenses.
 
@@ -28,6 +28,6 @@ This project is provided **“as is”** without warranties of any kind.
 
 ---
 
-## 📩 Contact
+## Contact
 
 For inquiries, please contact: **haithamalmalak@gmail.com**
